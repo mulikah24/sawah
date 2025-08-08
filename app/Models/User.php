@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
+use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
+
+    use HasRoles;
     use HasFactory, Notifiable; 
     protected $fillable = [
         'name',
@@ -22,11 +26,7 @@ class User extends Authenticatable
         return $this->hasMany(\App\Models\UserRequest::class);
     }
 
-    // إضافة دالة للتحقق من الدور
-    public function hasRole($role)
-    {
-        return $this->role === $role;
-    }
+    
     public function suggestions()
 {
     return $this->hasMany(Suggestion::class);

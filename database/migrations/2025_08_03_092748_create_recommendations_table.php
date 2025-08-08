@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up()
 {
-    Schema::create('suggestions', function (Blueprint $table) {
+    Schema::create('recommendations', function (Blueprint $table) {
         $table->id();
         $table->string('title');
         $table->text('content');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('suggestions');
+        Schema::dropIfExists('recomendations');
     }
 };

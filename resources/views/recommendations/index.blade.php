@@ -6,7 +6,7 @@
 
     @auth
         <div class="mb-4">
-            <a href="{{ route('suggestions.create') }}"
+            <a href="{{ route('recommendations.create') }}"
                class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
                أضف توصية جديدة
             </a>
@@ -17,15 +17,15 @@
         </p>
     @endauth
 
-    @if($suggestions->isEmpty())
+    @if($recommendations->isEmpty())
         <p class="text-gray-500">لا توجد توصيات حالياً.</p>
     @else
         <ul class="space-y-4">
-            @foreach($suggestions as $suggestion)
+            @foreach($recommendations as $recommendation)
                 <li class="bg-white p-4 rounded shadow">
-                    <h2 class="text-lg font-semibold">{{ $suggestion->title }}</h2>
-                    <p class="text-gray-700">{{ $suggestion->content }}</p>
-                    <p class="text-sm text-gray-500 mt-2">بواسطة: {{ $suggestion->user->name }}</p>
+                    <h2 class="text-lg font-semibold">{{ $recommendation->title }}</h2>
+                    <p class="text-gray-700">{{ $recommendation->content }}</p>
+                    <p class="text-sm text-gray-500 mt-2">بواسطة: {{ $recommendation->user->name }}</p>
                 </li>
             @endforeach
         </ul>

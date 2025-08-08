@@ -1,40 +1,49 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Order;
-use App\Models\Trip;  
+use App\Models\RequestTrip;
+use App\Models\Trip;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    // صفحة إنشاء الطلب مع عرض الرحلات
-    public function create()
-    {
-        $trips = Trip::all();  // جلب جميع الرحلات من قاعدة البيانات
-        return view('order.create', compact('trips'));
-    }
 
-    // صفحة الطلب (يمكن تستخدمها للعرض العام)
     public function index()
     {
         $trips = Trip::all();
-        return view('order',compact('trips'));
+        return view('order', compact('trips'));
+    }
+    // عرض نموذج طلب رحلة مستقل
+    public function createRequestTripForm()
+    {
+        $trips = Trip::all();
+        return view('order.request-trip', compact('trips'));
     }
 
-    // حفظ الطلب في قاعدة البيانات
-    public function store(Request $request)
+    // حفظ الطلب في نفس جدول request_trips
+    public function storeRequestTrip(Request $request, $id = null)
     {
+        $tripId = $id ?? $request->input('trip_id');
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'trip_name' => 'required|string|max:255',
-            'trip_price' => 'required|numeric',
+            'phone' => 'required|string|max:20',
+            'notes' => 'nullable|string|max:1000',
         ]);
 
-        Order::create($request->all());
+        $trip = Trip::findOrFail($tripId);
 
-        return redirect('/')->with('success', 'تم إرسال الطلب بنجاح!');
+        RequestTrip::create([
+            'user_id' => auth()->id(),
+            'trip_id' => $trip->id,
+            'name' => auth()->user()->name,
+            'email' => auth()->user()->email,
+            'phone' => $request->phone,
+            'notes' => $request->notes,
+        ]);
+
+        if (auth()->user()->hasRole('admin')) {
+            return redirect()->route('admin.requests.index')->with('success', 'تم إرسال الطلب بنجاح!');
+        } else {
+            return redirect()->route('user.requests')->with('success', 'تم إرسال الطلب بنجاح!');
+        }
     }
 }

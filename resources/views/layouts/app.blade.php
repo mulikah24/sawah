@@ -47,17 +47,18 @@
                 @if(auth()->user()->role === 'user')
                     <a href="{{ route('order') }}" class="block px-3 py-2 rounded hover:bg-amber-300">طلب رحلة</a>
                     <a href="{{ route('user.requests') }}" class="block px-3 py-2 rounded hover:bg-amber-300">طلبات الرحلات</a>
-                    <a href="{{ route('suggestions.create') }}" class="block px-3 py-2 rounded hover:bg-amber-300">التوصيات والمقترحات</a>
+                    <a href="{{ route('recommendations.create') }}" class="block px-3 py-2 rounded hover:bg-amber-300">التوصيات والمقترحات</a>
                     <a href="{{ route('contact') }}" class="block px-3 py-2 rounded hover:bg-amber-300">تواصل معنا</a>
                     <a href="{{ route('user.profile') }}" class="block px-3 py-2 rounded hover:bg-amber-300">حسابي الشخصي</a>
                 @elseif(auth()->user()->role === 'admin')
                     <a href="{{ route('admin.dashboard') }}" class="block px-3 py-2 rounded hover:bg-amber-300">لوحة التحكم</a>
                     <a href="{{ route('admin.trips.index') }}" class="block px-3 py-2 rounded hover:bg-amber-300">إدارة الرحلات</a>
-                    <a href="{{ route('admin.requests') }}" class="block px-3 py-2 rounded hover:bg-amber-300">إدارة الطلبات</a>
-                    <a href="{{ route('admin.recommendations') }}" class="block px-3 py-2 rounded hover:bg-amber-300">التوصيات والمقترحات</a>
+                    <a href="{{ route('admin.requests.index') }}" class="block px-3 py-2 rounded hover:bg-amber-300">إدارة الطلبات</a>
+                    <a href="{{ route('admin.recommendations.index') }}" class="block px-3 py-2 rounded hover:bg-amber-300">إدارة التوصيات والمقترحات</a>
+                    <a href="{{ route('admin.contacts.index') }}" class="block px-3 py-2 rounded hover:bg-amber-300">الرسائل الواردة</a>
                 @endif
             @else
-                <a href="{{ route('suggestions.index') }}" class="block px-3 py-2 rounded hover:bg-amber-300">التوصيات</a>
+                <a href="{{ route('recommendations.index') }}" class="block px-3 py-2 rounded hover:bg-amber-300">التوصيات</a>
                 <a href="{{ route('contact') }}" class="block px-3 py-2 rounded hover:bg-amber-300">تواصل معنا</a>
             @endauth
         </nav>

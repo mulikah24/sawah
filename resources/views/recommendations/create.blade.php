@@ -4,7 +4,7 @@
 <div class="max-w-2xl mx-auto mt-8 bg-white p-6 rounded shadow">
     <h1 class="text-2xl font-bold mb-6">أضف توصية جديدة</h1>
 
-    <form method="POST" action="{{ route('suggestions.store') }}">
+    <form method="POST" action="{{ route('recommendations.store') }}">
         @csrf
 
         <div class="mb-4">
@@ -22,7 +22,7 @@
             حفظ التوصية
         </button>
 
-        <a href="{{ route('suggestions.index') }}"
+        <a href="{{ route('recommendations.index') }}"
            class="ml-4 text-gray-600 hover:underline">
            الرجوع للتوصيات
         </a>
